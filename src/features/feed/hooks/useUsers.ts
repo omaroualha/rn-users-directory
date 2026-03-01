@@ -1,7 +1,7 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { apiHub } from "@/api/ApiHub";
 import { PAGE_SIZE } from "@/constants/api";
-import { toUserSummary, UserSummary } from "../types";
+import { toUserDetail, toUserSummary, UserSummary } from "../types";
 
 export type UserListResult = {
   users: UserSummary[];
@@ -17,9 +17,10 @@ export function useUserList(): UserListResult {
   const query = useInfiniteQuery({
     queryKey: ["users"],
     queryFn: ({ pageParam: page }) =>
-      apiHub.users
-        .getUsers(PAGE_SIZE, page * PAGE_SIZE)
-        .then((res) => ({ users: res.users.map(toUserSummary), total: res.total })),
+      apiHub.users.getUsers(PAGE_SIZE, page * PAGE_SIZE).then((res) => ({
+        users: res.users.map(toUserSummary),
+        total: res.total,
+      })),
     initialPageParam: 0,
     getNextPageParam: (lastPage, _allPages, currentPage) => {
       const fetched = (currentPage + 1) * PAGE_SIZE;
@@ -36,4 +37,15 @@ export function useUserList(): UserListResult {
     onLoadMore: query.fetchNextPage,
     onRefresh: query.refetch,
   };
+}
+
+export function useUserSearch(query: string) {
+  return useQuery({
+    queryKey: ["users", "search", query],
+    queryFn: () =>
+      apiHub.users
+        .searchUsers(query)
+        .then((res) => res.users.map(toUserSummary)),
+    enabled: query.trim().length > 0,
+  });
 }

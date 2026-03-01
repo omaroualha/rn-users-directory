@@ -1,33 +1,48 @@
-import React, { FC, useCallback } from "react";
+import React, { FC, useCallback, useState } from "react";
+import Box from "@/ui/atoms/Box";
+import { SearchBar } from "@/ui/molecules/SearchBar";
 import { ScreenWrapper } from "@/ui/molecules/ScreenWrapper";
 import { LoadingView } from "@/ui/molecules/LoadingView";
 import { ErrorView } from "@/ui/molecules/ErrorView";
 import { FeedStackScreenProps } from "../navigation/FeedStack";
-import { useUserList } from "../hooks/useUsers";
+import { useUserList, useUserSearch } from "../hooks/useUsers";
 import { UserList } from "../components/UserList";
 
 type FeedHomeProps = FeedStackScreenProps<"FeedHome">;
 
 export const FeedHome: FC<FeedHomeProps> = ({ navigation }) => {
-  const { users, isLoading, isError, isRefreshing, canLoadMore, onLoadMore, onRefresh } = useUserList();
+  const [search, setSearch] = useState("");
+  const isSearching = search.trim().length > 0;
+
+  const list = useUserList();
+  const searchResults = useUserSearch(search);
 
   const handleUserPress = useCallback(
     (userId: number) => navigation.navigate("UserDetail", { userId }),
     [navigation],
   );
 
-  if (isLoading) return <LoadingView />;
-  if (isError) return <ErrorView onRetry={onRefresh} />;
+  if (list.isLoading) return <LoadingView />;
+  if (list.isError) return <ErrorView onRetry={list.onRefresh} />;
 
   return (
     <ScreenWrapper>
+      <Box padding="m">
+        <SearchBar
+          value={search}
+          onChangeText={setSearch}
+          onClear={() => setSearch("")}
+        />
+      </Box>
       <UserList
-        users={users}
-        isRefreshing={isRefreshing}
-        canLoadMore={canLoadMore}
+        users={isSearching ? (searchResults.data ?? []) : list.users}
+        isRefreshing={
+          isSearching ? searchResults.isFetching : list.isRefreshing
+        }
+        canLoadMore={isSearching ? false : list.canLoadMore}
         onUserPress={handleUserPress}
-        onLoadMore={onLoadMore}
-        onRefresh={onRefresh}
+        onLoadMore={list.onLoadMore}
+        onRefresh={list.onRefresh}
       />
     </ScreenWrapper>
   );
