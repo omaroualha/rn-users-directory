@@ -2014,6 +2014,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@shopify/restyle@npm:^2.4.5":
+  version: 2.4.5
+  resolution: "@shopify/restyle@npm:2.4.5"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/51c92912ef452f89036d27175d7999f3c675868df5977eef4e6e3a1f96336856e68946c3f3c425c501de07a929ac4f6327e3c9f1ac5b91f336a122e32b28dcd9
+  languageName: node
+  linkType: hard
+
 "@sinclair/typebox@npm:^0.27.8":
   version: 0.27.10
   resolution: "@sinclair/typebox@npm:0.27.10"
@@ -6530,6 +6540,7 @@ __metadata:
     "@react-navigation/bottom-tabs": "npm:^7.15.2"
     "@react-navigation/native": "npm:^7.1.31"
     "@react-navigation/native-stack": "npm:^7.14.2"
+    "@shopify/restyle": "npm:^2.4.5"
     "@tanstack/react-query": "npm:^5.90.21"
     "@types/react": "npm:~19.2.2"
     axios: "npm:^1.13.6"
