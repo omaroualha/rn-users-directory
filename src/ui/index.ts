@@ -1,7 +1,6 @@
 export * from "./atoms/Box";
 export * from "./atoms/Text";
 export * from "./atoms/Avatar";
-export * from "./atoms/Button";
 export * from "./atoms/Input";
 export * from "./molecules/ScreenWrapper";
 export * from "./molecules/LoadingView";
