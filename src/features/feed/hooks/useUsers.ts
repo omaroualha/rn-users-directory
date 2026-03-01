@@ -1,4 +1,8 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import {
+  keepPreviousData,
+  useInfiniteQuery,
+  useQuery,
+} from "@tanstack/react-query";
 import { apiHub } from "@/api/ApiHub";
 import { PAGE_SIZE } from "@/constants/api";
 import { toUserDetail, toUserSummary, UserSummary } from "../types";
@@ -47,6 +51,8 @@ export function useUserSearch(query: string) {
         .searchUsers(query)
         .then((res) => res.users.map(toUserSummary)),
     enabled: query.trim().length > 0,
+    placeholderData: keepPreviousData,
+    staleTime: 30 * 1000,
   });
 }
 

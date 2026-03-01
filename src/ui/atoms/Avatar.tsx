@@ -1,3 +1,4 @@
+import { palette } from "@/theme";
 import React from "react";
 import { Image, Text, View, StyleSheet } from "react-native";
 
@@ -24,7 +25,13 @@ export const Avatar: React.FC<AvatarProps> = ({
   };
 
   if (uri) {
-    return <Image source={{ uri }} style={[styles.image, style]} resizeMode="cover" />;
+    return (
+      <Image
+        source={{ uri }}
+        style={[styles.image, style]}
+        resizeMode="cover"
+      />
+    );
   }
 
   return (
@@ -36,16 +43,16 @@ export const Avatar: React.FC<AvatarProps> = ({
 
 const styles = StyleSheet.create({
   image: {
-    backgroundColor: "#F3F4F6",
+    backgroundColor: palette.lightGray,
   },
   fallback: {
-    backgroundColor: "#F3F4F6",
+    backgroundColor: palette.lightGray,
     alignItems: "center",
     justifyContent: "center",
   },
   initials: {
     fontSize: 12,
     fontWeight: "500",
-    color: "#9CA3AF",
+    color: palette.mutedGray,
   },
 });

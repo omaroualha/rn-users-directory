@@ -2,10 +2,10 @@ import React, { FC, useCallback } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import Box from "@/ui/atoms/Box";
 import Text from "@/ui/atoms/Text";
-import { UserListItem } from "@/ui/molecules/UserListItem";
+import { UserGridItem } from "@/ui/molecules/UserGridItem";
 import { UserSummary } from "../types";
 
-interface UserListProps {
+interface UserGridProps {
   users: UserSummary[];
   isRefreshing: boolean;
   canLoadMore: boolean;
@@ -22,7 +22,7 @@ const EmptyComponent = () => (
   </Box>
 );
 
-export const UserList: FC<UserListProps> = ({
+export const UserGrid: FC<UserGridProps> = ({
   users,
   isRefreshing,
   canLoadMore,
@@ -32,7 +32,7 @@ export const UserList: FC<UserListProps> = ({
 }) => {
   const renderItem = useCallback(
     ({ item }: { item: UserSummary }) => (
-      <UserListItem user={item} onPress={onUserPress} />
+      <UserGridItem user={item} onPress={onUserPress} />
     ),
     [onUserPress],
   );
@@ -42,16 +42,19 @@ export const UserList: FC<UserListProps> = ({
       data={users}
       keyExtractor={(item) => String(item.id)}
       renderItem={renderItem}
+      numColumns={2}
       refreshing={isRefreshing}
       onRefresh={onRefresh}
       onEndReached={canLoadMore ? onLoadMore : undefined}
       onEndReachedThreshold={0.4}
       ListEmptyComponent={EmptyComponent}
       style={styles.list}
+      contentContainerStyle={styles.content}
     />
   );
 };
 
 const styles = StyleSheet.create({
   list: { flex: 1 },
+  content: { padding: 4 },
 });

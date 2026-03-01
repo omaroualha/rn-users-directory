@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { ScrollView, TouchableOpacity } from "react-native";
-import Animated, { FadeInDown } from "react-native-reanimated";
+import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 import Box from "@/ui/atoms/Box";
 import Text from "@/ui/atoms/Text";
 import { Avatar } from "@/ui/atoms/Avatar";
@@ -31,58 +31,71 @@ export const UserDetailScreen: FC<UserDetailScreenProps> = ({
       <Box padding="m" alignItems="flex-end">
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text variant="heading" color="primary">
-            X
+            x
           </Text>
         </TouchableOpacity>
       </Box>
       <ScrollView>
         {/* Header */}
-        <Box alignItems="center" padding="xl" gap="m">
-          <Avatar uri={user.image} initials={initials} size="lg" />
-          <Text variant="heading">{`${user.firstName} ${user.lastName}`}</Text>
-          <Text variant="caption">{user.company.title}</Text>
-          <Text variant="caption" color="textMuted">{`@${user.username}`}</Text>
-        </Box>
+        <Animated.View entering={FadeInDown.duration(400).springify()}>
+          <Box alignItems="center" padding="xl" gap="m">
+            <Avatar uri={user.image} initials={initials} size="lg" />
+            <Text variant="heading">{`${user.firstName} ${user.lastName}`}</Text>
+            <Text variant="caption">{user.company.title}</Text>
+            <Text
+              variant="caption"
+              color="textMuted"
+            >{`@${user.username}`}</Text>
+          </Box>
+        </Animated.View>
 
         <Divider />
 
         {/* Contact */}
-        <Box padding="l" gap="s">
-          <Text variant="label">Contact</Text>
-          <InfoRow label="Email" value={user.email} />
-          <InfoRow label="Phone" value={user.phone} />
-        </Box>
+        <Animated.View entering={FadeInUp.duration(300).delay(100)}>
+          <Box padding="l" gap="s">
+            <Text variant="label">Contact</Text>
+            <InfoRow label="Email" value={user.email} />
+            <InfoRow label="Phone" value={user.phone} />
+          </Box>
+        </Animated.View>
 
         <Divider />
 
         {/* Company */}
-        <Box padding="l" gap="s">
-          <Text variant="label">Company</Text>
-          <InfoRow label="Name" value={user.company.name} />
-          <InfoRow label="Department" value={user.company.department} />
-          <InfoRow label="Title" value={user.company.title} />
-        </Box>
+        <Animated.View entering={FadeInUp.duration(300).delay(200)}>
+          <Box padding="l" gap="s">
+            <Text variant="label">Company</Text>
+            <InfoRow label="Name" value={user.company.name} />
+            <InfoRow label="Department" value={user.company.department} />
+            <InfoRow label="Title" value={user.company.title} />
+          </Box>
+        </Animated.View>
 
         <Divider />
 
         {/* Location */}
-        <Box padding="l" gap="s">
-          <Text variant="label">Location</Text>
-          <InfoRow label="Address" value={user.address.address} />
-          <InfoRow label="City" value={user.address.city} />
-          <InfoRow label="State" value={user.address.state} />
-          <InfoRow label="Country" value={user.address.country} />
-        </Box>
+        <Animated.View entering={FadeInUp.duration(300).delay(300)}>
+          <Box padding="l" gap="s">
+            <Text variant="label">Location</Text>
+            <InfoRow label="Address" value={user.address.address} />
+            <InfoRow label="City" value={user.address.city} />
+            <InfoRow label="State" value={user.address.state} />
+            <InfoRow label="Country" value={user.address.country} />
+          </Box>
+        </Animated.View>
 
         <Divider />
 
         {/* Personal */}
-        <Box padding="l" gap="s">
-          <Text variant="label">Personal</Text>
-          <InfoRow label="Age" value={String(user.age)} />
-          <InfoRow label="Born" value={user.birthDate} />
-          <InfoRow label="Role" value={user.role} />
-        </Box>
+        <Animated.View entering={FadeInUp.duration(300).delay(400)}>
+          <Box padding="l" gap="s">
+            <Text variant="label">Personal</Text>
+            <InfoRow label="Age" value={String(user.age)} />
+            <InfoRow label="Born" value={user.birthDate} />
+            <InfoRow label="Role" value={user.role} />
+          </Box>
+        </Animated.View>
       </ScrollView>
     </ScreenWrapper>
   );

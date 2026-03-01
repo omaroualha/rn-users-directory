@@ -14,14 +14,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   onChangeText,
   onClear,
 }) => {
-  const clearButton = value.length > 0 ? (
-    <TouchableOpacity
-      onPress={onClear}
-      hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-    >
-      <Text variant="label">✕</Text>
-    </TouchableOpacity>
-  ) : undefined;
+  const clearButton =
+    value.length > 0 ? (
+      <TouchableOpacity onPress={onClear}>
+        <Text variant="label">✕</Text>
+      </TouchableOpacity>
+    ) : undefined;
 
   return (
     <Input
