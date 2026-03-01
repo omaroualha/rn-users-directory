@@ -30,7 +30,11 @@ export default function RootNavigator() {
       }}
     >
       <Stack.Screen name="MainTabStack" component={MainTabNavigator} />
-      <Stack.Screen name="UserDetail" component={UserDetailScreen} />
+      <Stack.Screen
+        name="UserDetail"
+        component={UserDetailScreen}
+        options={{ presentation: "fullScreenModal" }}
+      />
     </Stack.Navigator>
   );
 }

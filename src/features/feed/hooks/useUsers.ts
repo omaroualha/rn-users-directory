@@ -49,3 +49,11 @@ export function useUserSearch(query: string) {
     enabled: query.trim().length > 0,
   });
 }
+
+export function useUserById(id: number) {
+  return useQuery({
+    queryKey: ["users", id],
+    queryFn: () => apiHub.users.getUserById(id).then(toUserDetail),
+    staleTime: 5 * 60 * 1000,
+  });
+}

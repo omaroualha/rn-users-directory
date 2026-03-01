@@ -24,7 +24,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   };
 
   if (uri) {
-    return <Image source={{ uri }} style={[styles.image, style]} />;
+    return <Image source={{ uri }} style={[styles.image, style]} resizeMode="cover" />;
   }
 
   return (

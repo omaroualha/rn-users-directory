@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import Box from "../atoms/Box";
 import Text from "../atoms/Text";
 
@@ -6,7 +6,7 @@ interface ErrorViewProps {
   onRetry: () => void;
 }
 
-export function ErrorView({ onRetry }: ErrorViewProps) {
+export const ErrorView: FC<ErrorViewProps> = ({ onRetry }) => {
   return (
     <Box
       flex={1}

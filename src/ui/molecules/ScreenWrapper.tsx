@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Box from "../atoms/Box";
 
@@ -6,7 +6,7 @@ interface ScreenWrapperProps {
   children: React.ReactNode;
 }
 
-export function ScreenWrapper({ children }: ScreenWrapperProps) {
+export const ScreenWrapper: FC<ScreenWrapperProps> = ({ children }) => {
   const insets = useSafeAreaInsets();
 
   return (
