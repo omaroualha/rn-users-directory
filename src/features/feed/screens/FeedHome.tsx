@@ -7,15 +7,17 @@ import { ErrorView } from "@/ui/molecules/ErrorView";
 import { FeedStackScreenProps } from "../navigation/FeedStack";
 import { useUserList, useUserSearch } from "../hooks/useUsers";
 import { UserList } from "../components/UserList";
+import { useDebounce } from "@/hooks/useDebounce";
 
 type FeedHomeProps = FeedStackScreenProps<"FeedHome">;
 
 export const FeedHome: FC<FeedHomeProps> = ({ navigation }) => {
   const [search, setSearch] = useState("");
-  const isSearching = search.trim().length > 0;
+  const debouncedSearch = useDebounce(search, 300);
+  const isSearching = debouncedSearch.trim().length > 0;
 
   const list = useUserList();
-  const searchResults = useUserSearch(search);
+  const searchResults = useUserSearch(debouncedSearch);
 
   const handleUserPress = useCallback(
     (userId: number) => navigation.navigate("UserDetail", { userId }),
