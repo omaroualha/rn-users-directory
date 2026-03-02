@@ -10,7 +10,11 @@ const mockUser: UserSummary = {
   lastName: "Johnson",
   image: "https://dummyjson.com/icon/emilys/128",
   email: "emily.johnson@x.dummyjson.com",
-  company: { name: "Dooley, Kozey and Cronin", department: "Engineering", title: "Sales Manager" },
+  company: {
+    name: "Dooley, Kozey and Cronin",
+    department: "Engineering",
+    title: "Sales Manager",
+  },
 };
 
 describe("UserListItem", () => {
