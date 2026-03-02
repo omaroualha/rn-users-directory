@@ -23,4 +23,4 @@ export const ErrorView: FC<ErrorViewProps> = ({ onRetry }) => {
       </Text>
     </Box>
   );
-}
+};

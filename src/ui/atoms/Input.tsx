@@ -10,6 +10,7 @@ interface InputProps {
   placeholder?: string;
   error?: string;
   right?: React.ReactNode;
+  testID?: string;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -18,6 +19,7 @@ export const Input: React.FC<InputProps> = ({
   placeholder,
   error,
   right,
+  testID,
 }) => {
   return (
     <Box>
@@ -29,6 +31,7 @@ export const Input: React.FC<InputProps> = ({
           style={styles.input}
           autoCapitalize="none"
           autoCorrect={false}
+          testID={testID}
         />
         {right}
       </Box>

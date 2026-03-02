@@ -10,16 +10,36 @@ interface UserGridItemProps {
   onPress: (userId: number) => void;
 }
 
-export const UserGridItem: React.FC<UserGridItemProps> = memo(({ user, onPress }) => {
-  const initials = `${user.firstName[0]}${user.lastName[0]}`.toUpperCase();
+export const UserGridItem: React.FC<UserGridItemProps> = memo(
+  ({ user, onPress }) => {
+    const initials = `${user.firstName[0]}${user.lastName[0]}`.toUpperCase();
 
-  return (
-    <TouchableOpacity onPress={() => onPress(user.id)} activeOpacity={0.7} style={{ flex: 1 }}>
-      <Box flex={1} alignItems="center" padding="m" gap="s" margin="xs" backgroundColor="cardBackground" borderRadius="m">
-        <Avatar uri={user.image} initials={initials} size="lg" />
-        <Text variant="body" numberOfLines={1}>{`${user.firstName} ${user.lastName}`}</Text>
-        <Text variant="caption" numberOfLines={1}>{user.company.department}</Text>
-      </Box>
-    </TouchableOpacity>
-  );
-});
+    return (
+      <TouchableOpacity
+        testID="user-item"
+        onPress={() => onPress(user.id)}
+        activeOpacity={0.7}
+        style={{ flex: 1 }}
+      >
+        <Box
+          flex={1}
+          alignItems="center"
+          padding="m"
+          gap="s"
+          margin="xs"
+          backgroundColor="cardBackground"
+          borderRadius="m"
+        >
+          <Avatar uri={user.image} initials={initials} size="lg" />
+          <Text
+            variant="body"
+            numberOfLines={1}
+          >{`${user.firstName} ${user.lastName}`}</Text>
+          <Text variant="caption" numberOfLines={1}>
+            {user.company.department}
+          </Text>
+        </Box>
+      </TouchableOpacity>
+    );
+  },
+);

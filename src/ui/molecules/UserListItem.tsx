@@ -15,7 +15,11 @@ export const UserListItem: React.FC<UserListItemProps> = memo(
     const initials = `${user.firstName[0]}${user.lastName[0]}`.toUpperCase();
 
     return (
-      <TouchableOpacity onPress={() => onPress(user.id)} activeOpacity={0.7}>
+      <TouchableOpacity
+        testID="user-item"
+        onPress={() => onPress(user.id)}
+        activeOpacity={0.7}
+      >
         <Box flexDirection="row" alignItems="center" padding="l" gap="m">
           <Avatar uri={user.image} initials={initials} size="md" />
           <Box flex={1}>

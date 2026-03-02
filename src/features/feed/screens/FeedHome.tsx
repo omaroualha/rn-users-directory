@@ -52,6 +52,7 @@ export const FeedHome: FC<FeedHomeProps> = ({ navigation }) => {
           />
         </Box>
         <IconButton
+          testID="view-toggle"
           icon={viewMode === "list" ? "⊞" : "☰"}
           onPress={() =>
             setViewMode((prev) => (prev === "list" ? "grid" : "list"))

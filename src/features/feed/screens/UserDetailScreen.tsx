@@ -29,7 +29,10 @@ export const UserDetailScreen: FC<UserDetailScreenProps> = ({
   return (
     <ScreenWrapper>
       <Box padding="m" alignItems="flex-end">
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity
+          testID="detail-close"
+          onPress={() => navigation.goBack()}
+        >
           <Text variant="heading" color="primary">
             x
           </Text>
@@ -40,7 +43,10 @@ export const UserDetailScreen: FC<UserDetailScreenProps> = ({
         <Animated.View entering={FadeInDown.duration(400).springify()}>
           <Box alignItems="center" padding="xl" gap="m">
             <Avatar uri={user.image} initials={initials} size="lg" />
-            <Text variant="heading">{`${user.firstName} ${user.lastName}`}</Text>
+            <Text
+              testID="detail-name"
+              variant="heading"
+            >{`${user.firstName} ${user.lastName}`}</Text>
             <Text variant="caption">{user.company.title}</Text>
             <Text
               variant="caption"
@@ -63,7 +69,10 @@ export const UserDetailScreen: FC<UserDetailScreenProps> = ({
         <Divider />
 
         {/* Company */}
-        <Animated.View entering={FadeInUp.duration(300).delay(200)}>
+        <Animated.View
+          testID="detail-company-section"
+          entering={FadeInUp.duration(300).delay(200)}
+        >
           <Box padding="l" gap="s">
             <Text variant="label">Company</Text>
             <InfoRow label="Name" value={user.company.name} />

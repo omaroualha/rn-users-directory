@@ -18,4 +18,4 @@ export const ScreenWrapper: FC<ScreenWrapperProps> = ({ children }) => {
       {children}
     </Box>
   );
-}
+};

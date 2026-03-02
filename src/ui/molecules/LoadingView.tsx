@@ -10,8 +10,13 @@ interface LoadingViewProps {
 
 export const LoadingView: FC<LoadingViewProps> = ({ size = "large" }) => {
   return (
-    <Box flex={1} justifyContent="center" alignItems="center" backgroundColor="screenBackground">
+    <Box
+      flex={1}
+      justifyContent="center"
+      alignItems="center"
+      backgroundColor="screenBackground"
+    >
       <ActivityIndicator size={size} color={BRAND_COLOR} />
     </Box>
   );
-}
+};

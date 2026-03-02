@@ -27,6 +27,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       onChangeText={onChangeText}
       placeholder="Search users..."
       right={clearButton}
+      testID="search-input"
     />
   );
 };
