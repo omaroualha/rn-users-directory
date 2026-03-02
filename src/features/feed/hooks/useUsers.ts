@@ -20,15 +20,17 @@ export type UserListResult = {
 export function useUserList(): UserListResult {
   const query = useInfiniteQuery({
     queryKey: ["users"],
-    queryFn: ({ pageParam: page }) =>
-      apiHub.users.getUsers(PAGE_SIZE, page * PAGE_SIZE).then((res) => ({
+    queryFn: ({ pageParam: skip }) =>
+      apiHub.users.getUsers(PAGE_SIZE, skip).then((res) => ({
         users: res.users.map(toUserSummary),
         total: res.total,
+        skip: res.skip,
+        limit: res.limit,
       })),
     initialPageParam: 0,
-    getNextPageParam: (lastPage, _allPages, currentPage) => {
-      const fetched = (currentPage + 1) * PAGE_SIZE;
-      return fetched < lastPage.total ? currentPage + 1 : undefined;
+    getNextPageParam: (lastPage) => {
+      const nextSkip = lastPage.skip + lastPage.limit;
+      return nextSkip < lastPage.total ? nextSkip : undefined;
     },
   });
 
